@@ -224,10 +224,6 @@ section > h2 { margin-bottom: 24px; }
 .missing { min-height: 180px; display: grid; place-items: center; text-align: center; padding: 24px; color: var(--muted); font-size: 0.88rem; border: 2px dashed var(--line); border-radius: 10px; background: var(--bg); }
 .missing code { font-family: var(--font-mono); color: var(--accent); font-weight: 600; }
 
-/* Database Section Inside Project */
-.db-queries { display: grid; gap: 20px; margin-top: 10px; }
-.db-queries-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
-
 /* ==========================================================================
    Other Projects (.card grid)
    ========================================================================== */
@@ -414,11 +410,6 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
 .about-facts dt { color: var(--muted); font: 600 0.72rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; padding-top: 3px; }
 .about-facts dd { margin: 0; font-weight: 500; }
 @media (max-width: 960px) { .about-grid { justify-items: stretch; } }
-
-/* Sample-data labelling */
-.sample-note { color: var(--muted); font-size: 0.88rem; }
-.sample-note strong { color: var(--ink); }
-.sample-tag { padding: 6px 12px; font: 600 0.7rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--ph); border-bottom: 1px solid var(--line); }
 
 /* Certifications: grouped + collapsible */
 .cert-stack { display: grid; gap: 16px; }
@@ -813,82 +804,6 @@ details.cert-group .g-meta { margin-left: auto; font: 600 0.74rem var(--font-mon
         <figcaption><strong>Relational Schema Diagram:</strong> 10 core normalized tables linking users, collections and receipts, expenses and liquidation, supporting documents, audit logs, and financial reports. Click image to zoom.</figcaption>
       </figure>
 
-      <!-- Database Section: Sample SQL Queries (.query blocks with .kw, .str, .caret and .result tables) -->
-      <div class="db-queries">
-        <div class="db-queries-header">
-          <div>
-            <span class="label">Production-Grade SQL Queries</span>
-            <h3>ColManSys Core Queries &amp; Verification Checks</h3>
-          </div>
-          <span class="label">PostgreSQL 15+</span>
-        </div>
-        <p class="sample-note"><strong>Sample data.</strong> The results below are illustrative and are not actual parish records.</p>
-
-        <!-- Query 1: Monthly Collection Inflow by Category -->
-        <div class="query">
-          <div class="bar">
-            <span><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="label">query_monthly_collections.sql</span></span>
-            <span class="label">Aggregated Revenue Summary</span>
-          </div>
-<pre><span class="kw">SELECT</span> 
-    ct.type_name <span class="kw">AS</span> category,
-    <span class="kw">COUNT</span>(c.collection_id) <span class="kw">AS</span> total_transactions,
-    <span class="kw">TO_CHAR</span>(<span class="kw">SUM</span>(c.amount), <span class="str">'FM&#8369;999,999.00'</span>) <span class="kw">AS</span> total_collected
-<span class="kw">FROM</span> collections c
-<span class="kw">INNER JOIN</span> collection_types ct <span class="kw">ON</span> c.type_id = ct.type_id
-<span class="kw">WHERE</span> c.status = <span class="str">'posted'</span> 
-  <span class="kw">AND</span> c.collection_date &gt;= <span class="str">'2026-10-01'</span>
-<span class="kw">GROUP BY</span> ct.type_name
-<span class="kw">ORDER BY</span> <span class="kw">SUM</span>(c.amount) <span class="kw">DESC</span>;<span class="caret" aria-hidden="true"></span></pre>
-          <div class="result">
-            <div class="sample-tag">Sample data &middot; illustrative output</div>
-            <table>
-              <thead>
-                <tr><th>category</th><th>total_transactions</th><th>total_collected</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Sunday Mass Tithes &amp; Offertory</td><td>48</td><td>&#8369;142,650.00</td></tr>
-                <tr><td>Parish Thanksgiving Donations</td><td>19</td><td>&#8369;54,200.00</td></tr>
-                <tr><td>Sacramental &amp; Mass Intentions</td><td>94</td><td>&#8369;38,150.00</td></tr>
-                <tr><td>Special Sanctuary Fund Drive</td><td>12</td><td>&#8369;26,500.00</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Query 2: Voucher Approval & Audit Trail Verification -->
-        <div class="query">
-          <div class="bar">
-            <span><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="label">query_voucher_audit_status.sql</span></span>
-            <span class="label">Multi-Stage Approval Queue</span>
-          </div>
-<pre><span class="kw">SELECT</span> 
-    v.voucher_no,
-    v.payee,
-    <span class="kw">TO_CHAR</span>(v.amount, <span class="str">'FM&#8369;99,999.00'</span>) <span class="kw">AS</span> amount,
-    v.stage <span class="kw">AS</span> approval_stage,
-    u.full_name <span class="kw">AS</span> originated_by,
-    v.updated_at
-<span class="kw">FROM</span> disbursement_vouchers v
-<span class="kw">JOIN</span> users u <span class="kw">ON</span> v.officer_id = u.user_id
-<span class="kw">WHERE</span> v.status = <span class="str">'in_review'</span>
-<span class="kw">ORDER BY</span> v.updated_at <span class="kw">ASC</span>;<span class="caret" aria-hidden="true"></span></pre>
-          <div class="result">
-            <div class="sample-tag">Sample data &middot; illustrative output</div>
-            <table>
-              <thead>
-                <tr><th>voucher_no</th><th>payee</th><th>amount</th><th>approval_stage</th><th>originated_by</th><th>updated_at</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>DV-2026-108</td><td>Solar Tech Power Cabanatuan</td><td>&#8369;18,500.00</td><td>Admin Final Review</td><td>R. Santos (Treasurer)</td><td>2026-11-04 14:30</td></tr>
-                <tr><td>DV-2026-112</td><td>St. Joseph Printing Supplies</td><td>&#8369;6,450.00</td><td>Treasurer Review</td><td>P. De Vera (Collector)</td><td>2026-11-05 09:15</td></tr>
-                <tr><td>DV-2026-115</td><td>Parish Outreach Feeding Drive</td><td>&#8369;12,000.00</td><td>Treasurer Review</td><td>P. De Vera (Collector)</td><td>2026-11-05 11:40</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-      </div>
     </article>
   </section>
 
