@@ -107,6 +107,14 @@ nav ul a.active { color: var(--accent); background: var(--accent-soft); }
 .hero .stack { display: flex; flex-direction: column; gap: 16px; }
 .hero-intro-bar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .hero-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); box-shadow: var(--shadow); flex: none; }
+.hero-visual { display: grid; gap: 16px; }
+.hero-portrait-card { display: flex; align-items: center; gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; box-shadow: var(--shadow); }
+.hero-portrait-img { width: 92px; height: 92px; border-radius: 12px; object-fit: cover; border: 2px solid var(--accent); flex: none; cursor: zoom-in; }
+.hero-portrait-meta { display: grid; gap: 3px; min-width: 0; }
+.hero-portrait-meta b { font: 700 1.08rem var(--font-display); color: var(--ink); line-height: 1.2; }
+.hero-portrait-meta .hero-sub { font-size: 0.88rem; color: var(--accent); font-weight: 600; }
+.hero-portrait-meta .hero-school { font-size: 0.82rem; color: var(--muted); }
+.hero-portrait-meta .badge-mini { display: inline-flex; align-items: center; gap: 6px; font: 600 0.72rem var(--font-mono); color: var(--good); margin-top: 2px; }
 .badge { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; font: 600 0.75rem var(--font-mono); letter-spacing: 0.04em; color: var(--good); background: var(--surface); border: 1px solid var(--line); padding: 6px 14px; border-radius: 999px; box-shadow: var(--shadow); }
 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 0 var(--good); }
 .hl { background: linear-gradient(transparent 62%, var(--accent-soft) 62%); }
@@ -447,29 +455,41 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
       </div>
     </div>
 
-    <!-- Live Profile SQL Query Card -->
-    <div class="query" aria-label="Interactive SQL query profile">
-      <div class="bar">
-        <span><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="label">developer_profile.sql</span></span>
-        <span class="label">1 row affected</span>
+    <!-- Hero Right Column: Profile Portrait + SQL Terminal Card -->
+    <div class="hero-visual">
+      <div class="hero-portrait-card">
+        <img src="profile.jpg" alt="Philip Manuel P. De Vera" class="hero-portrait-img" data-zoom width="92" height="92">
+        <div class="hero-portrait-meta">
+          <b>Philip Manuel P. De Vera</b>
+          <span class="hero-sub">BSIT &middot; Database Systems Technology</span>
+          <span class="hero-school">Nueva Ecija University of Science and Technology</span>
+          <span class="badge-mini"><span class="dot"></span>Class of 2027</span>
+        </div>
       </div>
+
+      <div class="query" aria-label="Interactive SQL query profile">
+        <div class="bar">
+          <span><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="label">developer_profile.sql</span></span>
+          <span class="label">1 row affected</span>
+        </div>
 <pre><span class="kw">SELECT</span> name, program, institution, core_focus
 <span class="kw">FROM</span>   candidate_registry
 <span class="kw">WHERE</span>  availability = <span class="str">'Internship / Junior Role'</span>;<span class="caret" aria-hidden="true"></span></pre>
-      <div class="result">
-        <table>
-          <thead>
-            <tr><th>name</th><th>program</th><th>institution</th><th>core_focus</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Philip Manuel P. De Vera</td>
-              <td>BSIT - Database Systems</td>
-              <td>NEUST Cabanatuan</td>
-              <td>RDBMS, SQL, Full-Stack PHP</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="result">
+          <table>
+            <thead>
+              <tr><th>name</th><th>program</th><th>institution</th><th>core_focus</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Philip Manuel P. De Vera</td>
+                <td>BSIT - Database Systems</td>
+                <td>NEUST Cabanatuan</td>
+                <td>RDBMS, SQL, Full-Stack PHP</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </header>
