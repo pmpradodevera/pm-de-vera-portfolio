@@ -500,15 +500,15 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
   <div class="stats reveal" aria-label="Key Highlights">
     <div class="stat">
       <b>10</b>
-      <span>Normalized Tables in Main Capstone</span>
+      <span>core normalized tables in the ColManSys database</span>
     </div>
     <div class="stat">
-      <b>3.59 / 4.0</b>
-      <span>IT Expert Evaluation Mean (Very Functional)</span>
+      <b>3.59 / 4.00</b>
+      <span>IT expert grand mean (Very Functional)</span>
     </div>
     <div class="stat">
       <b>3</b>
-      <span>Tiered Approval Roles with Full Audit Trail</span>
+      <span>user roles with role-based access control and an audit trail</span>
     </div>
     <div class="stat">
       <b>16+</b>
@@ -533,7 +533,7 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
       </div>
       <div class="about">
         <p>I am a passionate <strong>BS Information Technology student at NEUST</strong> specializing in Database Systems Technology. I thrive at the intersection of data modeling and practical software engineering&mdash;translating messy real-world operational workflows into normalized relational databases, high-integrity audit trails, and intuitive web interfaces.</p>
-        <p>As the lead developer and database architect of <em>ColManSys</em>, I designed a financial record and multi-tier voucher approval system for Our Mother of Perpetual Help Parish that scored <strong>3.59/4.00 (Very Functional)</strong> under ISO/IEC 25010 standards. Beyond development, I serve as Treasurer for the <em>Data Geek Society</em>, applying strict budget accountability and purchasing oversight. I am actively seeking an internship or junior developer role where I can build reliable, data-backed solutions.</p>
+        <p>As the lead developer and database administrator of <em>ColManSys</em>, a collection management system proposed for deployment at Our Mother of Perpetual Help Parish, Cabanatuan City, I designed the relational database and multi-tier approval workflow. Evaluated under the ISO/IEC 25010 software quality model, six IT expert evaluators gave a grand mean of 3.59/4.00, interpreted as "Very Functional", and four parish end-users gave a grand mean of 3.53/4.00, interpreted as "Very Acceptable". Beyond development, I serve as Treasurer for the <em>Data Geek Society</em>, applying strict budget accountability and purchasing oversight. I am actively seeking an internship or junior developer role where I can build reliable, data-backed solutions.</p>
       </div>
     </div>
   </section>
@@ -630,17 +630,18 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
       <!-- Summary & User Roles Table -->
       <div class="top">
         <div class="summary">
-          <h3>Collection Management System for Our Mother of Perpetual Help Parish</h3>
-          <p>A mission-critical financial web application engineered for Our Mother of Perpetual Help Parish in Cabanatuan City. ColManSys digitizes parish collections, tracks designated donations and special funds, automates voucher approvals, enforces a double-entry ledger, and generates real-time financial transparency reports.</p>
+          <h3>Collection management system proposed for deployment at Our Mother of Perpetual Help Parish, Cabanatuan City</h3>
+          <p>A web-based financial system proposed for deployment at Our Mother of Perpetual Help Parish, Cabanatuan City. Built on 10 core normalized tables in PostgreSQL, ColManSys digitizes parish collections, tracks designated donations and special funds, automates voucher approvals, enforces a double-entry ledger, and produces real-time financial transparency reports. It replaces an older system from 2016 that had no approval workflow, ledger, audit trail, or restore function.</p>
+          <p style="color: var(--muted); font-size: 0.95rem;">Developed with teammates Auburn John Albert T. Valdez and John Mel I. Villamor.</p>
           <div class="tags">
-            <span class="tag">Lead Developer</span>
-            <span class="tag">Database Architect</span>
+            <span class="tag">Lead developer and database administrator</span>
+            <span class="tag">10 core normalized tables</span>
             <span class="tag">PostgreSQL</span>
             <span class="tag">PHP</span>
             <span class="tag">Role-Based Access Control</span>
             <span class="tag">Double-Entry Accounting</span>
             <span class="tag">Immutable Audit Trail</span>
-            <span class="tag">ISO/IEC 25010 Certified</span>
+            <span class="tag">ISO/IEC 25010 Evaluated</span>
           </div>
         </div>
 
@@ -651,8 +652,8 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
             </thead>
             <tbody>
               <tr>
-                <td><strong>Admin (Parish Priest)</strong></td>
-                <td>System oversight, final disbursement approvals, security settings, user management, and audit log inspection.</td>
+                <td><strong>Admin</strong></td>
+                <td>System administrator and approving authority: oversight, final disbursement approvals, security settings, user management, and audit log inspection.</td>
               </tr>
               <tr>
                 <td><strong>Treasurer</strong></td>
@@ -660,7 +661,7 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
               </tr>
               <tr>
                 <td><strong>Collection Officer</strong></td>
-                <td>Daily mass collections recording, automated official receipt issuance, petty cash tracking, and voucher filing.</td>
+                <td>Daily mass collections recording, automated official receipt issuance, petty cash tracking, and voucher drafting.</td>
               </tr>
             </tbody>
           </table>
@@ -671,53 +672,54 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
       <div class="case">
         <div>
           <span class="label">Problem</span>
-          <p>The parish's legacy 2016 desktop system lacked approval workflows, fund separation, audit logs, and backup capabilities. Clerks re-encoded records across multiple Excel sheets, leading to transcription errors, delayed reports, and untracked petty cash.</p>
+          <p>The parish's legacy 2016 desktop system lacked approval workflows, fund separation, audit logs, and backup capabilities. Clerks re-encoded records across multiple spreadsheets, leading to repeated entries, transcription errors, delayed reports, and untracked petty cash.</p>
         </div>
         <div>
-          <span class="label">Solution</span>
-          <p>Engineered a 3-tier web platform with a normalized PostgreSQL relational database, automated voucher routing, double-entry ledger posting, and strict tamper-evident logging where voided entries require administrative reason notes.</p>
+          <span class="label">Database design</span>
+          <p>A normalized relational schema in PostgreSQL with 10 core normalized tables, primary and foreign key constraints, time-stamped transactions, audit tables, and balanced double-entry posting. Approved transactions cannot be deleted; corrections go through logged void or refund entries.</p>
         </div>
         <div>
-          <span class="label">My Specific Contribution</span>
-          <p>Served as Lead Developer and Database Administrator: designed the complete 10-table ERD, authored normalized schema DDLs, coded core PHP backend modules, and implemented the responsive role dashboards.</p>
+          <span class="label">My role</span>
+          <p>Lead developer and database administrator. I was in charge of the database architecture, schema normalization, ERD and data flow diagrams, as well as core backend modules. Developed with teammates Auburn John Albert T. Valdez and John Mel I. Villamor.</p>
         </div>
         <div>
           <span class="label">Evaluated Result</span>
-          <p>Formally evaluated under the international ISO/IEC 25010 Software Quality Model: <strong>6 IT Experts gave a 3.59 grand mean ("Very Functional")</strong>, and <strong>4 Parish End-Users gave a 3.53 grand mean ("Very Acceptable")</strong>.</p>
+          <p>Evaluated under the ISO/IEC 25010 software quality model for the system proposed for deployment at Our Mother of Perpetual Help Parish, Cabanatuan City: six IT expert evaluators gave a grand mean of 3.59/4.00, interpreted as "Very Functional", and four parish end-users gave a grand mean of 3.53/4.00, interpreted as "Very Acceptable".</p>
         </div>
       </div>
 
       <!-- Approval Flow (.flow > .steps > .step) -->
       <div class="flow">
-        <span class="label">3-Tier Disbursement Voucher Approval Workflow</span>
+        <span class="label">Voucher Workflow</span>
+        <p style="color: var(--muted); font-size: 0.95rem;">Multi-tier voucher workflow: the Collection Officer drafts, the Treasurer verifies, and the Treasurer and Admin give second-level approval, followed by release and liquidation.</p>
         <div class="steps">
           <div class="step">
             <span class="n">STAGE 01</span>
             <b>Collection Officer</b>
-            <span>Files the voucher request with itemized line items and attached receipts.</span>
+            <span>Drafts the voucher request with itemized line items and supporting documents.</span>
           </div>
           <span class="arrow" aria-hidden="true">&rarr;</span>
           <div class="step">
             <span class="n">STAGE 02</span>
-            <b>Parish Treasurer</b>
-            <span>Performs first-level budget verification, validates fund availability, and endorses.</span>
+            <b>Treasurer</b>
+            <span>Verifies fund availability, budget allocation, and first-level endorsement.</span>
           </div>
           <span class="arrow" aria-hidden="true">&rarr;</span>
           <div class="step">
             <span class="n">STAGE 03</span>
-            <b>Parish Priest (Admin)</b>
-            <span>Conducts final review, authorizes release, and commits transaction to the audit ledger.</span>
+            <b>Treasurer &amp; Admin</b>
+            <span>Give second-level approval, followed by disbursement release and liquidation logging in the audit trail.</span>
           </div>
         </div>
       </div>
 
       <!-- ISO Evaluation Scores (.scores with animated .meter) -->
       <div class="scores">
-        <span class="label">Independent Evaluation Scores (ISO/IEC 25010 Quality Model)</span>
+        <span class="label">Evaluation (ISO/IEC 25010 Quality Model)</span>
         <div class="score">
           <div class="row">
-            <span>Six IT Specialists (Functional Suitability, Security, Performance)</span>
-            <b>3.59 / 4.00 (Very Functional)</b>
+            <span>Six IT expert evaluators &middot; grand mean 3.59/4.00, interpreted as "Very Functional"</span>
+            <b>3.59</b>
           </div>
           <div class="meter" role="img" aria-label="3.59 out of 4.00">
             <i data-w="89.75"></i>
@@ -725,14 +727,14 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
         </div>
         <div class="score">
           <div class="row">
-            <span>Four Parish End-Users (Usability, Reliability, Task Efficiency)</span>
-            <b>3.53 / 4.00 (Very Acceptable)</b>
+            <span>Four parish end-users &middot; grand mean 3.53/4.00, interpreted as "Very Acceptable"</span>
+            <b>3.53</b>
           </div>
           <div class="meter" role="img" aria-label="3.53 out of 4.00">
             <i data-w="88.25"></i>
           </div>
         </div>
-        <small>Animated meter bars calculated as percentage of 4.00 Likert Scale benchmarks.</small>
+        <small>Bars show the grand mean on a 4.00 scale (system proposed for deployment at Our Mother of Perpetual Help Parish, Cabanatuan City).</small>
       </div>
 
       <!-- Screenshot Gallery with Tabs (.tabs/.tab, .shot, .frame) -->
@@ -776,8 +778,8 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
       <!-- Database Section: ERD Image (.erdfig) -->
       <figure class="erdfig">
         <span class="label">Entity-Relationship Architecture (3NF Relational Model)</span>
-        <img src="colmansys-erd.png" alt="ColManSys Entity-Relationship Diagram showing 10 interconnected tables: users, collections, collection_types, receipts, expenses, projects, liquidations, expense_documents, audit_logs, and financial_reports" width="1282" height="1512" loading="lazy" data-zoom>
-        <figcaption><strong>Relational Schema Diagram:</strong> Ten normalized entities handling user privileges, batch collections, itemized receipts, expense vouchers, supporting document attachments, and continuous audit logs. Click image to zoom.</figcaption>
+        <img src="colmansys-erd.png" alt="ColManSys Entity-Relationship Diagram showing 10 core normalized tables: users, collections, collection_types, receipts, expenses, projects, liquidations, expense_documents, audit_logs, and financial_reports" width="1282" height="1512" loading="lazy" data-zoom>
+        <figcaption><strong>Relational Schema Diagram:</strong> 10 core normalized tables linking users, collections and receipts, expenses and liquidation, supporting documents, audit logs, and financial reports. Click image to zoom.</figcaption>
       </figure>
 
       <!-- Database Section: Sample SQL Queries (.query blocks with .kw, .str, .caret and .result tables) -->
@@ -945,43 +947,49 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
       <div class="card featured wide">
         <span class="pill">International Industry Credential</span>
         <h3>IT Specialist: Databases</h3>
-        <p><strong>Certiport / Pearson VUE</strong> &middot; Awarded October 28, 2026 &middot; Valid for 5 Years &middot; Verification ID: <code>h8FL-4wUQ</code></p>
+        <p><strong>Certiport / Pearson VUE</strong> &middot; Awarded October 28, 2026 &middot; Valid for 5 years &middot; Verification ID available on request.</p>
         <p>Validates core competencies in relational database concepts, entity modeling, SQL query syntax, data definition language (DDL), transaction security, and backup strategies.</p>
-        <div class="when" style="margin-top: 6px;">
-          Credential ID: <strong>h8FL-4wUQ</strong> &middot; Officially Verified by Certiport
+        <div class="links">
+          <a class="view" href="it-specialist-databases.pdf" target="_blank" rel="noopener">View certificate (PDF)</a>
+          <a class="view" href="https://verify.certiport.com" target="_blank" rel="noopener">Verify online at Certiport</a>
         </div>
       </div>
 
       <!-- Specific Technical Seminars -->
-      <div class="card">
+      <a class="card" href="database-101.pdf" target="_blank" rel="noopener">
         <span class="when">Technical Webinar</span>
         <h3>Database 101: Data Storage, SQL and Query Optimization</h3>
         <p>UpskillTechPH &middot; August 21, 2026 &middot; Index structures, query execution plans, and normalization.</p>
-      </div>
+        <span class="view">View certificate</span>
+      </a>
 
-      <div class="card">
+      <a class="card" href="data-driven-crisis-management.pdf" target="_blank" rel="noopener">
         <span class="when">Analytical Seminar</span>
         <h3>Data-Driven Crisis Management: AI &amp; Predictive Analytics</h3>
         <p>Armstrong Training and Development &middot; August 30, 2026 &middot; Predictive emergency data systems.</p>
-      </div>
+        <span class="view">View certificate</span>
+      </a>
 
-      <div class="card">
+      <a class="card" href="ai-tools-101-gemini.pdf" target="_blank" rel="noopener">
         <span class="when">AI Productivity</span>
         <h3>AI Tools 101: How to Use Google Gemini Like a Pro</h3>
         <p>UpskillTechPH &middot; August 22, 2026 &middot; Prompt engineering and developer workflow acceleration.</p>
-      </div>
+        <span class="view">View certificate</span>
+      </a>
 
-      <div class="card">
+      <a class="card" href="learning-advocate-2026.pdf" target="_blank" rel="noopener">
         <span class="when">Industry Trends</span>
         <h3>Learning Advocate 2026 Series: Emerging IT Innovations</h3>
         <p>UpskillTechPH &middot; August 22, 2026 &middot; Modern cloud paradigms and decentralized data storage.</p>
-      </div>
+        <span class="view">View certificate</span>
+      </a>
 
-      <div class="card">
+      <a class="card" href="Certificate%20for%203P%27s%20Webinar.pdf" target="_blank" rel="noopener">
         <span class="when">Professional Development</span>
         <h3>Webinar Series 2026: The 3 P's: Plan, Prepare, Progress</h3>
         <p>PHINMA Education &middot; October 17, 2026 &middot; Mental wellness, AI ethics, and IT career launch.</p>
-      </div>
+        <span class="view">View certificate</span>
+      </a>
 
       <!-- Wadhwani Foundation Employability Microcredentials -->
       <div class="card wide">
@@ -989,16 +997,16 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
         <h3>Employability Skills: JobReady (With AI) Curriculum</h3>
         <p>Comprehensive 75-hour skill readiness diploma (Advanced Level) along with 9 foundational professional development microcertificates:</p>
         <ul class="jr-list">
-          <li><strong>Skill Readiness Diploma (Advanced Level)</strong><span>Nov 11, 2026</span></li>
-          <li><span>Effective Speaking &amp; Listening Skills</span><span>Aug 28, 2026</span></li>
-          <li><span>Impactful Technical Writing Skills</span><span>Aug 28, 2026</span></li>
-          <li><span>Self Management &amp; Accountability</span><span>Sep 18, 2026</span></li>
-          <li><span>Interpersonal &amp; Team Collaboration</span><span>Oct 19, 2026</span></li>
-          <li><span>Problem Solving &amp; Innovation</span><span>Oct 19, 2026</span></li>
-          <li><span>Workplace Professionalism</span><span>Oct 25, 2026</span></li>
-          <li><span>Customer Centricity &amp; Service</span><span>Oct 25, 2026</span></li>
-          <li><span>Introduction to Artificial Intelligence</span><span>Nov 05, 2026</span></li>
-          <li><span>Workplace Productivity Tools</span><span>Nov 05, 2026</span></li>
+          <li><a href="Wadhwani%20Foundation%20Certificate%20-%206af4599c9e6f844f711f29e4%20%281%29.pdf" target="_blank" rel="noopener"><b>Skill Readiness Diploma (Advanced Level)</b></a><span>Nov 11, 2026</span></li>
+          <li><a href="Wadhwani%20Foundation%20Certificate%20-%206a9113909ca40b8cfd13178b%20%281%29.pdf" target="_blank" rel="noopener">Effective Speaking &amp; Listening Skills</a><span>Aug 28, 2026</span></li>
+          <li><a href="Wadhwani%20Foundation%20Certificate%20-%206a9114339ca40b8cfd132063%20%281%29.pdf" target="_blank" rel="noopener">Impactful Technical Writing Skills</a><span>Aug 28, 2026</span></li>
+          <li><a href="Wadhwani%20Foundation%20Certificate%20-%206aacbc50f51dd7877a1dfd9b%20%281%29%20%281%29.pdf" target="_blank" rel="noopener">Self Management &amp; Accountability</a><span>Sep 18, 2026</span></li>
+          <li><a href="Wadhwani%20Foundation%20Certificate%20-%206ad5d665b14b60e6f01808a0%20%281%29.pdf" target="_blank" rel="noopener">Interpersonal &amp; Team Collaboration</a><span>Oct 19, 2026</span></li>
+          <li><a href="Wadhwani%20Foundation%20Certificate%20-%206ad5d66553737975de58f861%20%281%29.pdf" target="_blank" rel="noopener">Problem Solving &amp; Innovation</a><span>Oct 19, 2026</span></li>
+          <li><a href="Wadhwani%20Foundation%20Certificate%20-%206adde7a353737975de5e5f5b%20%281%29.pdf" target="_blank" rel="noopener">Workplace Professionalism</a><span>Oct 25, 2026</span></li>
+          <li><a href="Wadhwani%20Foundation%20Certificate%20-%206adde7a353737975de5e5f5f%20%281%29.pdf" target="_blank" rel="noopener">Customer Centricity &amp; Service</a><span>Oct 25, 2026</span></li>
+          <li><a href="Wadhwani%20Foundation%20Certificate%20-%206aec3454f631fff89c72d708%20%281%29.pdf" target="_blank" rel="noopener">Introduction to Artificial Intelligence</a><span>Nov 05, 2026</span></li>
+          <li><a href="Wadhwani%20Foundation%20Certificate%20-%206aec34545005ebd298dab752%20%281%29.pdf" target="_blank" rel="noopener">Workplace Productivity Tools</a><span>Nov 05, 2026</span></li>
         </ul>
       </div>
     </div>
