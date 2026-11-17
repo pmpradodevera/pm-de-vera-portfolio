@@ -56,6 +56,10 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
 body {
   margin: 0;
   background: var(--bg); color: var(--ink);
@@ -63,7 +67,6 @@ body {
   padding-block: 0 48px;
   background-image: radial-gradient(70rem 28rem at 50% -8rem, var(--accent-soft), transparent 70%);
   background-repeat: no-repeat;
-  overflow-x: clip;
 }
 img { max-width: 100%; display: block; }
 [hidden] { display: none !important; }
@@ -287,71 +290,95 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
 .hint { display: none; color: var(--muted); font: 500 0.72rem var(--font-mono); letter-spacing: .06em; }
 
 /* ==========================================================================
-   Responsive Breakpoints
+   Responsive Breakpoints & Mobile Optimization
    ========================================================================== */
-@media (max-width: 960px) {
+@media (max-width: 1040px) {
   html { scroll-padding-top: 68px; }
   .nav-in { padding-block: 8px; flex-wrap: nowrap; }
-  nav .who { font-size: 0.95rem; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  nav .who { font-size: clamp(0.92rem, 3.5vw, 1.05rem); min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
   nav .right { flex: none; flex-wrap: nowrap; gap: 8px; }
-  .menu { display: grid; }
-  .theme { width: 40px; height: 40px; }
-  nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 2px; padding: 12px 16px 16px; background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: var(--shadow); font-size: 1rem; }
+  .menu { display: grid; width: 42px; height: 42px; }
+  .theme { width: 42px; height: 42px; }
+  nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 4px; padding: 14px 16px 18px; background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: var(--shadow); font-size: 1.05rem; }
   nav.open ul { display: flex; }
-  nav ul a { padding: 12px 14px; }
+  nav ul a { padding: 12px 14px; border-radius: 8px; }
+}
+
+@media (max-width: 960px) {
   .hero, .project .top, .contact-wrap { grid-template-columns: minmax(0, 1fr); }
   .hero { padding-block: 40px 24px; gap: 28px; }
-  .badge { white-space: normal; }
   .case { grid-template-columns: 1fr 1fr; }
   .timeline-item { grid-template-columns: 1fr; gap: 6px; }
-  .about-grid { grid-template-columns: 1fr; gap: 24px; }
-  .about-photo-card { max-width: 220px; }
+  .about-grid { grid-template-columns: 1fr; gap: 24px; justify-items: center; }
+  .about-photo-card { max-width: 240px; }
 }
 
 @media (max-width: 760px) {
-  html { scroll-padding-top: 68px; }
+  html { scroll-padding-top: 66px; }
   body { font-size: 15.5px; }
   .nav-in { padding-block: 8px; }
   .hero { padding-block: 28px 20px; gap: 24px; }
   .hero .lead { font-size: 1rem; }
-  .cta { display: grid; grid-template-columns: 1fr 1fr; }
-  .cta .btn { justify-content: center; min-height: 46px; padding-inline: 12px; }
-  .cta .btn.primary { grid-column: 1 / -1; }
-  .query pre { font-size: 0.8rem; }
+  .query { padding: 16px; border-radius: 12px; }
+  .query pre { font-size: 0.78rem; white-space: pre-wrap; overflow-wrap: anywhere; }
   .result table { font-size: 0.78rem; }
+  .result .kv th { width: 1%; white-space: nowrap; border-bottom: 1px solid var(--line); font: 600 0.78rem var(--font-mono); }
+  .result .kv td { white-space: normal; border-bottom: 1px solid var(--line); word-break: break-word; }
 
-  .stats { grid-template-columns: 1fr 1fr; }
+  .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
   .stat { padding: 16px; }
   .stat b { font-size: 1.6rem; }
+  .stat b small { font-size: 0.5em; font-weight: 600; color: var(--muted); margin-left: 3px; letter-spacing: 0; }
 
   section { padding-block: 36px; }
   section.first { padding-top: 14px; }
-  h2 { font-size: 1.4rem; }
-  .about-grid { grid-template-columns: 1fr; gap: 20px; justify-items: center; }
-  .about-photo-card { max-width: 220px; }
+  h1 { font-size: clamp(1.9rem, 7vw, 2.7rem); }
+  h2 { font-size: 1.45rem; }
+
   .skills { grid-template-columns: 1fr; gap: 12px; }
   .skill { grid-template-columns: 40px 1fr; column-gap: 14px; align-items: start; }
   .skill .ico { grid-row: 1 / 3; margin: 0; }
 
   .project { padding: 18px; gap: 24px; border-radius: 12px; }
   .case { grid-template-columns: 1fr; gap: 12px; }
-  .steps { flex-direction: column; }
-  .step { flex: none; }
+  .roles { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 10px; }
+  .roles table { min-width: 460px; font-size: 0.84rem; }
+  .steps { flex-direction: column; gap: 8px; }
+  .step { flex: none; width: 100%; }
   .arrow { display: block; transform: rotate(90deg); align-self: flex-start; margin-left: 20px; }
+
   .tabs { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; margin-inline: -4px; padding: 0 4px 6px; }
   .tabs::-webkit-scrollbar { display: none; }
-  .tab { white-space: nowrap; min-height: 42px; padding-inline: 14px; }
-  .frame { overflow-x: auto; }
-  .shot img { min-width: 540px; }
-  .hint { display: block; }
+  .tab { white-space: nowrap; min-height: 44px; padding-inline: 14px; }
+  .frame { overflow: hidden; border-radius: 10px; }
+  .shot img { width: 100%; height: auto; min-width: 0; display: block; object-fit: contain; }
+  .erdfig img { width: 100%; height: auto; display: block; object-fit: contain; }
+  .hint { display: block; font-size: 0.75rem; margin-top: -4px; margin-bottom: 10px; }
+
   .two, .three { grid-template-columns: 1fr; gap: 14px; }
   .card { padding: 18px; }
-  .contact dl { grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 18px; }
+  .card.wide { grid-column: auto; }
+  .jr-list { grid-template-columns: 1fr; gap: 0; }
+  .jr-list li { flex-direction: column; align-items: flex-start; gap: 2px; padding: 8px 0; }
+
+  .contact-wrap { grid-template-columns: minmax(0, 1fr); max-width: 100%; }
+  .contact dl { grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 18px; }
   .contact dt { padding-top: 10px; }
   .contact dt:first-child { padding-top: 0; }
-  .copy { padding: 6px 12px; }
-  footer { flex-direction: column; text-align: center; gap: 6px; }
+  .contact dd { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .copy { margin-left: 0; min-height: 36px; padding: 6px 14px; }
+  footer { flex-direction: column; text-align: center; gap: 8px; }
   .totop { right: 16px; bottom: max(16px, env(safe-area-inset-bottom, 0px)); width: 44px; height: 44px; }
+}
+
+@media (max-width: 520px) {
+  .cta { display: flex; flex-direction: column; width: 100%; gap: 10px; }
+  .cta .btn { width: 100%; justify-content: center; min-height: 48px; }
+  .stats { grid-template-columns: 1fr; gap: 8px; }
+  .stat { padding: 14px 16px; }
+  .stat b { font-size: 1.5rem; }
+  .about-photo-card { max-width: 100%; width: 100%; }
+  .about-photo { max-width: 180px; margin-inline: auto; }
 }
 
 @media (hover: none) {
@@ -378,64 +405,6 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
   [hidden] { display: grid !important; }
   section { break-inside: avoid; }
 }
-
-/* ==========================================================================
-   Fixes (v2)
-   ========================================================================== */
-/* Nav: collapse earlier so the 7 links + name never wrap to two rows */
-@media (max-width: 1100px) {
-  html { scroll-padding-top: 68px; }
-  .nav-in { padding-block: 8px; flex-wrap: nowrap; }
-  nav .who { font-size: 0.95rem; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-  nav .right { flex: none; flex-wrap: nowrap; gap: 8px; }
-  .menu { display: grid; }
-  .theme { width: 40px; height: 40px; }
-  nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 2px; padding: 12px 16px 16px; background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: var(--shadow); font-size: 1rem; }
-  nav.open ul { display: flex; }
-  nav ul a { padding: 12px 14px; }
-}
-
-/* Hero SQL result as a record view */
-.result .kv th { width: 1%; white-space: nowrap; border-bottom: 1px solid var(--line); font: 600 0.78rem var(--font-mono); }
-.result .kv tr:last-child th { border-bottom: 0; }
-.result .kv td { white-space: normal; border-bottom: 1px solid var(--line); }
-.result .kv tr:last-child td { border-bottom: 0; }
-
-/* Stats: keep "/4.00" on one line on narrow screens */
-.stat b small { font-size: 0.5em; font-weight: 600; color: var(--muted); margin-left: 3px; letter-spacing: 0; }
-
-/* About: quick-facts card replaces the repeated photo */
-.about-facts { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; box-shadow: var(--shadow); display: grid; gap: 12px; width: 100%; }
-.about-facts dl { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 10px 16px; font-size: 0.9rem; }
-.about-facts dt { color: var(--muted); font: 600 0.72rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; padding-top: 3px; }
-.about-facts dd { margin: 0; font-weight: 500; }
-@media (max-width: 960px) { .about-grid { justify-items: stretch; } }
-
-/* Certifications: grouped + collapsible */
-.cert-stack { display: grid; gap: 16px; }
-details.cert-group { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
-details.cert-group > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 16px 20px; font: 700 1.02rem var(--font-display); }
-details.cert-group > summary::-webkit-details-marker { display: none; }
-details.cert-group > summary::after { content: ""; width: 9px; height: 9px; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(45deg); transition: transform .2s; flex: none; margin: -3px 4px 0 0; }
-details.cert-group[open] > summary::after { transform: rotate(-135deg); margin-top: 3px; }
-details.cert-group .g-meta { margin-left: auto; font: 600 0.74rem var(--font-mono); color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
-.cert-body { padding: 0 20px 14px; }
-.cert-intro { color: var(--muted); font-size: 0.92rem; }
-.cert-group .jr-list { margin-top: 6px; }
-.cert-group .jr-list li > div { min-width: 0; }
-.cert-group .jr-list small { display: block; color: var(--muted); font-size: 0.82rem; margin-top: 2px; }
-@media (max-width: 760px) {
-  details.cert-group > summary { padding: 14px 16px; }
-  .cert-body { padding: 0 16px 10px; }
-  .cert-group .jr-list li { flex-direction: column; gap: 2px; }
-}
-
-.cert-group .jr-list { grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); }
-@media (min-width: 961px) { .about-grid { grid-template-columns: minmax(250px, 290px) 1fr; } }
-.hero .query pre { font-size: 0.82rem; }
-.query .bar { flex-wrap: wrap; gap: 4px 12px; }
-.hero .query pre { white-space: pre-wrap; overflow-wrap: anywhere; }
-.contact-wrap { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
 </style>
 </head>
 <body>
@@ -757,7 +726,7 @@ details.cert-group .g-meta { margin-left: auto; font: 600 0.74rem var(--font-mon
       <!-- Screenshot Gallery with Tabs (.tabs/.tab, .shot, .frame) -->
       <div class="shots">
         <span class="label">System User Interfaces</span>
-        <span class="hint">Swipe horizontally to pan screenshot on mobile &middot; Tap to enlarge</span>
+        <span class="hint">Tap any screenshot or diagram to view full-resolution zoom</span>
         <div class="tabs" role="tablist" aria-label="Dashboards by role">
           <button class="tab" role="tab" id="tab-admin" aria-selected="true" aria-controls="shot-admin" type="button">Admin Dashboard</button>
           <button class="tab" role="tab" id="tab-treasurer" aria-selected="false" aria-controls="shot-treasurer" type="button" tabindex="-1">Treasurer Dashboard</button>
