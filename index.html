@@ -106,15 +106,6 @@ nav ul a.active { color: var(--accent); background: var(--accent-soft); }
 .hero .lead { color: var(--muted); font-size: 1.1rem; max-width: 54ch; margin-top: 14px; }
 .hero .stack { display: flex; flex-direction: column; gap: 16px; }
 .hero-intro-bar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.hero-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); box-shadow: var(--shadow); flex: none; }
-.hero-visual { display: grid; gap: 16px; }
-.hero-portrait-card { display: flex; align-items: center; gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; box-shadow: var(--shadow); }
-.hero-portrait-img { width: 92px; height: 92px; border-radius: 12px; object-fit: cover; border: 2px solid var(--accent); flex: none; cursor: zoom-in; }
-.hero-portrait-meta { display: grid; gap: 3px; min-width: 0; }
-.hero-portrait-meta b { font: 700 1.08rem var(--font-display); color: var(--ink); line-height: 1.2; }
-.hero-portrait-meta .hero-sub { font-size: 0.88rem; color: var(--accent); font-weight: 600; }
-.hero-portrait-meta .hero-school { font-size: 0.82rem; color: var(--muted); }
-.hero-portrait-meta .badge-mini { display: inline-flex; align-items: center; gap: 6px; font: 600 0.72rem var(--font-mono); color: var(--good); margin-top: 2px; }
 .badge { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; font: 600 0.75rem var(--font-mono); letter-spacing: 0.04em; color: var(--good); background: var(--surface); border: 1px solid var(--line); padding: 6px 14px; border-radius: 999px; box-shadow: var(--shadow); }
 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 0 var(--good); }
 .hl { background: linear-gradient(transparent 62%, var(--accent-soft) 62%); }
@@ -272,17 +263,12 @@ a.card:hover .view::after { transform: translate(2px, -2px); }
 /* ==========================================================================
    Contact Section
    ========================================================================== */
-.contact-wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 24px; align-items: start; }
-.contact dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 12px 24px; margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; box-shadow: var(--shadow); }
+.contact-wrap { max-width: 680px; margin-inline: auto; }
+.contact dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 14px 28px; margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 26px 30px; box-shadow: var(--shadow); }
 .contact dt { color: var(--muted); font: 600 0.78rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; padding-top: 4px; }
 .contact dd { margin: 0; overflow-wrap: anywhere; }
 .copy { margin-left: 10px; font: 600 0.75rem var(--font-mono); border: 1px solid var(--line); background: var(--bg); color: var(--muted); border-radius: 6px; padding: 4px 10px; cursor: pointer; transition: all .15s ease; }
 .copy:hover { color: var(--accent); border-color: var(--accent); }
-.contact-form { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 14px; box-shadow: var(--shadow); }
-.form-group { display: grid; gap: 6px; }
-.form-group label { font: 600 0.76rem var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-.form-group input, .form-group textarea { width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font: inherit; font-size: 0.92rem; background: var(--bg); color: var(--ink); }
-.form-group textarea { resize: vertical; min-height: 85px; }
 
 /* ==========================================================================
    Footer & Utilities
@@ -390,12 +376,75 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
 @keyframes blink { 50% { opacity: 0; } }
 
 @media print {
-  nav, .totop, .theme, .tabs, .cta, .contact-form { display: none !important; }
+  nav, .totop, .theme, .tabs, .cta { display: none !important; }
   body { background: #fff; background-image: none; color: #000; }
   .js .reveal { opacity: 1; transform: none; }
   [hidden] { display: grid !important; }
   section { break-inside: avoid; }
 }
+
+/* ==========================================================================
+   Fixes (v2)
+   ========================================================================== */
+/* Nav: collapse earlier so the 7 links + name never wrap to two rows */
+@media (max-width: 1100px) {
+  html { scroll-padding-top: 68px; }
+  .nav-in { padding-block: 8px; flex-wrap: nowrap; }
+  nav .who { font-size: 0.95rem; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  nav .right { flex: none; flex-wrap: nowrap; gap: 8px; }
+  .menu { display: grid; }
+  .theme { width: 40px; height: 40px; }
+  nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 2px; padding: 12px 16px 16px; background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: var(--shadow); font-size: 1rem; }
+  nav.open ul { display: flex; }
+  nav ul a { padding: 12px 14px; }
+}
+
+/* Hero SQL result as a record view */
+.result .kv th { width: 1%; white-space: nowrap; border-bottom: 1px solid var(--line); font: 600 0.78rem var(--font-mono); }
+.result .kv tr:last-child th { border-bottom: 0; }
+.result .kv td { white-space: normal; border-bottom: 1px solid var(--line); }
+.result .kv tr:last-child td { border-bottom: 0; }
+
+/* Stats: keep "/4.00" on one line on narrow screens */
+.stat b small { font-size: 0.5em; font-weight: 600; color: var(--muted); margin-left: 3px; letter-spacing: 0; }
+
+/* About: quick-facts card replaces the repeated photo */
+.about-facts { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; box-shadow: var(--shadow); display: grid; gap: 12px; width: 100%; }
+.about-facts dl { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 10px 16px; font-size: 0.9rem; }
+.about-facts dt { color: var(--muted); font: 600 0.72rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; padding-top: 3px; }
+.about-facts dd { margin: 0; font-weight: 500; }
+@media (max-width: 960px) { .about-grid { justify-items: stretch; } }
+
+/* Sample-data labelling */
+.sample-note { color: var(--muted); font-size: 0.88rem; }
+.sample-note strong { color: var(--ink); }
+.sample-tag { padding: 6px 12px; font: 600 0.7rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--ph); border-bottom: 1px solid var(--line); }
+
+/* Certifications: grouped + collapsible */
+.cert-stack { display: grid; gap: 16px; }
+details.cert-group { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+details.cert-group > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 16px 20px; font: 700 1.02rem var(--font-display); }
+details.cert-group > summary::-webkit-details-marker { display: none; }
+details.cert-group > summary::after { content: ""; width: 9px; height: 9px; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(45deg); transition: transform .2s; flex: none; margin: -3px 4px 0 0; }
+details.cert-group[open] > summary::after { transform: rotate(-135deg); margin-top: 3px; }
+details.cert-group .g-meta { margin-left: auto; font: 600 0.74rem var(--font-mono); color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.cert-body { padding: 0 20px 14px; }
+.cert-intro { color: var(--muted); font-size: 0.92rem; }
+.cert-group .jr-list { margin-top: 6px; }
+.cert-group .jr-list li > div { min-width: 0; }
+.cert-group .jr-list small { display: block; color: var(--muted); font-size: 0.82rem; margin-top: 2px; }
+@media (max-width: 760px) {
+  details.cert-group > summary { padding: 14px 16px; }
+  .cert-body { padding: 0 16px 10px; }
+  .cert-group .jr-list li { flex-direction: column; gap: 2px; }
+}
+
+.cert-group .jr-list { grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); }
+@media (min-width: 961px) { .about-grid { grid-template-columns: minmax(250px, 290px) 1fr; } }
+.hero .query pre { font-size: 0.82rem; }
+.query .bar { flex-wrap: wrap; gap: 4px 12px; }
+.hero .query pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.contact-wrap { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
 </style>
 </head>
 <body>
@@ -436,7 +485,6 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
   <header class="hero" id="top">
     <div class="stack">
       <div class="hero-intro-bar">
-        <img src="profile.jpg" alt="Philip Manuel P. De Vera" class="hero-avatar" width="48" height="48">
         <span class="badge"><span class="dot"></span>Open to Internship &amp; Junior Roles &middot; Class of 2027</span>
       </div>
       <span class="label">Junior Database Developer &middot; Web Developer &middot; Systems Analyst</span>
@@ -448,48 +496,31 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
         <a class="btn secondary" href="Philip_Manuel_De_Vera_Resume.pdf" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
-          Download CV
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Resume (PDF)
         </a>
         <a class="btn ghost" href="#contact">Contact Me</a>
       </div>
     </div>
 
-    <!-- Hero Right Column: Profile Portrait + SQL Terminal Card -->
-    <div class="hero-visual">
-      <div class="hero-portrait-card">
-        <img src="profile.jpg" alt="Philip Manuel P. De Vera" class="hero-portrait-img" data-zoom width="92" height="92">
-        <div class="hero-portrait-meta">
-          <b>Philip Manuel P. De Vera</b>
-          <span class="hero-sub">BSIT &middot; Database Systems Technology</span>
-          <span class="hero-school">Nueva Ecija University of Science and Technology</span>
-          <span class="badge-mini"><span class="dot"></span>Class of 2027</span>
-        </div>
+    <!-- Live Profile SQL Query Card -->
+    <div class="query" aria-label="Interactive SQL query profile">
+      <div class="bar">
+        <span><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="label">developer_profile.sql</span></span>
+        <span class="label">1 row affected</span>
       </div>
-
-      <div class="query" aria-label="Interactive SQL query profile">
-        <div class="bar">
-          <span><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="label">developer_profile.sql</span></span>
-          <span class="label">1 row affected</span>
-        </div>
 <pre><span class="kw">SELECT</span> name, program, institution, core_focus
 <span class="kw">FROM</span>   candidate_registry
 <span class="kw">WHERE</span>  availability = <span class="str">'Internship / Junior Role'</span>;<span class="caret" aria-hidden="true"></span></pre>
-        <div class="result">
-          <table>
-            <thead>
-              <tr><th>name</th><th>program</th><th>institution</th><th>core_focus</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Philip Manuel P. De Vera</td>
-                <td>BSIT - Database Systems</td>
-                <td>NEUST Cabanatuan</td>
-                <td>RDBMS, SQL, Full-Stack PHP</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="result">
+        <table class="kv">
+          <tbody>
+            <tr><th scope="row">name</th><td>Philip Manuel P. De Vera</td></tr>
+            <tr><th scope="row">program</th><td>Database Systems Technology</td></tr>
+            <tr><th scope="row">institution</th><td>NEUST Cabanatuan</td></tr>
+            <tr><th scope="row">core_focus</th><td>Database design</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </header>
@@ -503,7 +534,7 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
       <span>core normalized tables in the ColManSys database</span>
     </div>
     <div class="stat">
-      <b>3.59 / 4.00</b>
+      <b>3.59<small>/4.00</small></b>
       <span>IT expert grand mean (Very Functional)</span>
     </div>
     <div class="stat">
@@ -524,10 +555,10 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
     <h2>Turning Complex Requirements Into Clean Data Systems</h2>
     <div class="about-grid">
       <div class="about-photo-card">
-        <img src="profile.jpg" alt="Philip Manuel P. De Vera - BSIT Database Systems Student at NEUST" class="about-photo" data-zoom width="240" height="240">
+        <img src="profile.jpg" alt="Philip Manuel P. De Vera - Database Systems Technology Student at NEUST" class="about-photo" data-zoom width="240" height="240">
         <div class="about-caption">
           <b>Philip Manuel P. De Vera</b>
-          <span>BSIT &middot; Database Systems</span>
+          <span>Database Systems Technology</span>
           <span class="tag" style="justify-self: center; margin-top: 4px;">NEUST Class of 2027</span>
         </div>
       </div>
@@ -791,6 +822,7 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
           </div>
           <span class="label">PostgreSQL 15+</span>
         </div>
+        <p class="sample-note"><strong>Sample data.</strong> The results below are illustrative and are not actual parish records.</p>
 
         <!-- Query 1: Monthly Collection Inflow by Category -->
         <div class="query">
@@ -809,6 +841,7 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
 <span class="kw">GROUP BY</span> ct.type_name
 <span class="kw">ORDER BY</span> <span class="kw">SUM</span>(c.amount) <span class="kw">DESC</span>;<span class="caret" aria-hidden="true"></span></pre>
           <div class="result">
+            <div class="sample-tag">Sample data &middot; illustrative output</div>
             <table>
               <thead>
                 <tr><th>category</th><th>total_transactions</th><th>total_collected</th></tr>
@@ -841,6 +874,7 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
 <span class="kw">WHERE</span> v.status = <span class="str">'in_review'</span>
 <span class="kw">ORDER BY</span> v.updated_at <span class="kw">ASC</span>;<span class="caret" aria-hidden="true"></span></pre>
           <div class="result">
+            <div class="sample-tag">Sample data &middot; illustrative output</div>
             <table>
               <thead>
                 <tr><th>voucher_no</th><th>payee</th><th>amount</th><th>approval_stage</th><th>originated_by</th><th>updated_at</th></tr>
@@ -865,6 +899,7 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
     <span class="label">Additional Portfolio Work</span>
     <h2>Other Academic &amp; Applied Projects</h2>
     <div class="three">
+      <!-- TODO: point each card's href to that project's own repo URL, then relabel it "Explore Repository". -->
       <!-- Project 1 -->
       <article class="card">
         <span class="when">Academic Project &middot; 2026</span>
@@ -876,7 +911,7 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
           <span class="tag">Database Triggers</span>
           <span class="tag">Bootstrap</span>
         </div>
-        <a class="view" href="https://github.com/pmpradodevera" target="_blank" rel="noopener">Explore Repository</a>
+        <a class="view" href="https://github.com/pmpradodevera" target="_blank" rel="noopener">View on GitHub</a>
       </article>
 
       <!-- Project 2 -->
@@ -890,7 +925,7 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
           <span class="tag">JavaScript</span>
           <span class="tag">RBAC Security</span>
         </div>
-        <a class="view" href="https://github.com/pmpradodevera" target="_blank" rel="noopener">Explore Repository</a>
+        <a class="view" href="https://github.com/pmpradodevera" target="_blank" rel="noopener">View on GitHub</a>
       </article>
 
       <!-- Project 3 -->
@@ -904,7 +939,7 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
           <span class="tag">CSS Grid</span>
           <span class="tag">Financial Audits</span>
         </div>
-        <a class="view" href="https://github.com/pmpradodevera" target="_blank" rel="noopener">Explore Repository</a>
+        <a class="view" href="https://github.com/pmpradodevera" target="_blank" rel="noopener">View on GitHub</a>
       </article>
     </div>
   </section>
@@ -942,7 +977,7 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
   <section id="certifications" class="reveal">
     <span class="label">Professional Credentials</span>
     <h2>Certifications &amp; Micro-Credentials</h2>
-    <div class="two">
+    <div class="cert-stack">
       <!-- Industry Certification Banner -->
       <div class="card featured wide">
         <span class="pill">International Industry Credential</span>
@@ -955,48 +990,26 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
         </div>
       </div>
 
-      <!-- Specific Technical Seminars -->
-      <a class="card" href="database-101.pdf" target="_blank" rel="noopener">
-        <span class="when">Technical Webinar</span>
-        <h3>Database 101: Data Storage, SQL and Query Optimization</h3>
-        <p>UpskillTechPH &middot; August 21, 2026 &middot; Index structures, query execution plans, and normalization.</p>
-        <span class="view">View certificate</span>
-      </a>
+      <!-- Webinars & seminars (grouped) -->
+      <details class="cert-group" open>
+        <summary><span class="g-title">Webinars &amp; seminars</span><span class="g-meta">5 certificates</span></summary>
+        <div class="cert-body">
+          <ul class="jr-list">
+            <li><div><a href="database-101.pdf" target="_blank" rel="noopener"><b>Database 101: Data Storage, SQL and Query Optimization</b></a><small>UpskillTechPH &middot; index structures, query execution plans, normalization</small></div><span>Aug 21, 2026</span></li>
+            <li><div><a href="ai-tools-101-gemini.pdf" target="_blank" rel="noopener"><b>AI Tools 101: How to Use Google Gemini Like a Pro</b></a><small>UpskillTechPH &middot; prompt engineering and developer workflows</small></div><span>Aug 22, 2026</span></li>
+            <li><div><a href="learning-advocate-2026.pdf" target="_blank" rel="noopener"><b>Learning Advocate 2026 Series: Emerging IT Innovations</b></a><small>UpskillTechPH &middot; modern cloud paradigms and decentralized storage</small></div><span>Aug 22, 2026</span></li>
+            <li><div><a href="data-driven-crisis-management.pdf" target="_blank" rel="noopener"><b>Data-Driven Crisis Management: AI &amp; Predictive Analytics</b></a><small>Armstrong Training and Development &middot; predictive emergency data systems</small></div><span>Aug 30, 2026</span></li>
+            <li><div><a href="Certificate%20for%203P%27s%20Webinar.pdf" target="_blank" rel="noopener"><b>Webinar Series 2026: The 3 P's: Plan, Prepare, Progress</b></a><small>PHINMA Education &middot; mental wellness, AI ethics, IT career launch</small></div><span>Oct 17, 2026</span></li>
+          </ul>
+        </div>
+      </details>
 
-      <a class="card" href="data-driven-crisis-management.pdf" target="_blank" rel="noopener">
-        <span class="when">Analytical Seminar</span>
-        <h3>Data-Driven Crisis Management: AI &amp; Predictive Analytics</h3>
-        <p>Armstrong Training and Development &middot; August 30, 2026 &middot; Predictive emergency data systems.</p>
-        <span class="view">View certificate</span>
-      </a>
-
-      <a class="card" href="ai-tools-101-gemini.pdf" target="_blank" rel="noopener">
-        <span class="when">AI Productivity</span>
-        <h3>AI Tools 101: How to Use Google Gemini Like a Pro</h3>
-        <p>UpskillTechPH &middot; August 22, 2026 &middot; Prompt engineering and developer workflow acceleration.</p>
-        <span class="view">View certificate</span>
-      </a>
-
-      <a class="card" href="learning-advocate-2026.pdf" target="_blank" rel="noopener">
-        <span class="when">Industry Trends</span>
-        <h3>Learning Advocate 2026 Series: Emerging IT Innovations</h3>
-        <p>UpskillTechPH &middot; August 22, 2026 &middot; Modern cloud paradigms and decentralized data storage.</p>
-        <span class="view">View certificate</span>
-      </a>
-
-      <a class="card" href="Certificate%20for%203P%27s%20Webinar.pdf" target="_blank" rel="noopener">
-        <span class="when">Professional Development</span>
-        <h3>Webinar Series 2026: The 3 P's: Plan, Prepare, Progress</h3>
-        <p>PHINMA Education &middot; October 17, 2026 &middot; Mental wellness, AI ethics, and IT career launch.</p>
-        <span class="view">View certificate</span>
-      </a>
-
-      <!-- Wadhwani Foundation Employability Microcredentials -->
-      <div class="card wide">
-        <span class="pill">Wadhwani Foundation</span>
-        <h3>Employability Skills: JobReady (With AI) Curriculum</h3>
-        <p>Comprehensive 75-hour skill readiness diploma (Advanced Level) along with 9 foundational professional development microcertificates:</p>
-        <ul class="jr-list">
+      <!-- Wadhwani JobReady (grouped) -->
+      <details class="cert-group">
+        <summary><span class="g-title">Wadhwani Foundation &middot; JobReady (With AI)</span><span class="g-meta">10 certificates</span></summary>
+        <div class="cert-body">
+          <p class="cert-intro">75-hour Skill Readiness Diploma (Advanced Level) plus 9 professional-development microcertificates.</p>
+          <ul class="jr-list">
           <li><a href="Wadhwani%20Foundation%20Certificate%20-%206af4599c9e6f844f711f29e4%20%281%29.pdf" target="_blank" rel="noopener"><b>Skill Readiness Diploma (Advanced Level)</b></a><span>Nov 11, 2026</span></li>
           <li><a href="Wadhwani%20Foundation%20Certificate%20-%206a9113909ca40b8cfd13178b%20%281%29.pdf" target="_blank" rel="noopener">Effective Speaking &amp; Listening Skills</a><span>Aug 28, 2026</span></li>
           <li><a href="Wadhwani%20Foundation%20Certificate%20-%206a9114339ca40b8cfd132063%20%281%29.pdf" target="_blank" rel="noopener">Impactful Technical Writing Skills</a><span>Aug 28, 2026</span></li>
@@ -1008,7 +1021,8 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
           <li><a href="Wadhwani%20Foundation%20Certificate%20-%206aec3454f631fff89c72d708%20%281%29.pdf" target="_blank" rel="noopener">Introduction to Artificial Intelligence</a><span>Nov 05, 2026</span></li>
           <li><a href="Wadhwani%20Foundation%20Certificate%20-%206aec34545005ebd298dab752%20%281%29.pdf" target="_blank" rel="noopener">Workplace Productivity Tools</a><span>Nov 05, 2026</span></li>
         </ul>
-      </div>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -1050,22 +1064,6 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
           <a href="Philip_Manuel_De_Vera_Resume.pdf" target="_blank" rel="noopener">View resume (PDF)</a>
         </dd>
       </dl>
-
-      <!-- Quick Message Form (Mailto Generator) -->
-      <form class="contact-form" action="mailto:pmpradodevera@gmail.com" method="get" enctype="text/plain">
-        <div class="form-group">
-          <label for="c-subject">Subject</label>
-          <input type="text" id="c-subject" name="subject" placeholder="Inquiry: Internship / Project Opportunity" required>
-        </div>
-        <div class="form-group">
-          <label for="c-body">Message</label>
-          <textarea id="c-body" name="body" placeholder="Hello Philip, I came across your portfolio and would like to discuss..." required></textarea>
-        </div>
-        <button class="btn primary" type="submit">
-          Send Email via Mail App
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-        </button>
-      </form>
     </div>
   </section>
 
@@ -1274,6 +1272,11 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
       if (e.target === lightboxDlg) lightboxDlg.close();
     });
   }
+
+  // Print: expand collapsed certification groups
+  window.addEventListener('beforeprint', function () {
+    document.querySelectorAll('details').forEach(function (d) { d.open = true; });
+  });
 
   // 7. Copy email address button
   var copyBtn = document.getElementById('copy');
