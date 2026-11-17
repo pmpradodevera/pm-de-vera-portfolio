@@ -302,6 +302,133 @@ a.card:hover .view::after { transform: translate(2px, -2px); }
   .contact-email-actions .copy { flex: 1; justify-content: center; }
 }
 
+/* Email Choice Modal */
+dialog.email-modal {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 16px;
+  padding: 0;
+  max-width: 480px;
+  width: 92vw;
+  box-shadow: 0 20px 48px rgba(0,0,0,0.25);
+  margin: auto;
+}
+dialog.email-modal::backdrop {
+  background: rgba(8, 12, 16, 0.72);
+  backdrop-filter: blur(4px);
+}
+.modal-box {
+  padding: 24px;
+  display: grid;
+  gap: 14px;
+}
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-top h3 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+.modal-close {
+  background: transparent;
+  border: 0;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all .15s ease;
+}
+.modal-close:hover {
+  color: var(--ink);
+  background: var(--bg);
+}
+.modal-sub {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin: -6px 0 0;
+}
+.email-options {
+  display: grid;
+  gap: 10px;
+}
+.email-opt {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .15s ease;
+  font: inherit;
+  text-align: left;
+  width: 100%;
+}
+.email-opt:hover {
+  border-color: var(--accent);
+  background: var(--surface);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.email-opt.primary-opt {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.opt-ico {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--surface);
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  flex: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.opt-text {
+  flex: 1;
+  min-width: 0;
+}
+.opt-text b {
+  display: block;
+  font-size: 0.96rem;
+  color: var(--ink);
+}
+.opt-text span {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.35;
+  margin-top: 2px;
+}
+.opt-arrow {
+  color: var(--muted);
+  font-size: 1.1rem;
+  flex: none;
+  transition: transform .15s ease;
+}
+.email-opt:hover .opt-arrow {
+  transform: translateX(3px);
+  color: var(--accent);
+}
+.opt-badge {
+  font: 600 0.75rem var(--font-mono);
+  color: var(--accent);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 4px 8px;
+  border-radius: 6px;
+  flex: none;
+}
+
 /* ==========================================================================
    Footer & Utilities
    ========================================================================== */
@@ -924,7 +1051,13 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
           </div>
         </div>
         <div class="contact-email-actions">
-          <a href="mailto:pmpradodevera@gmail.com" class="btn primary btn-sm">Send Email</a>
+          <button type="button" class="btn primary btn-sm" id="btn-send-email">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Send Email
+          </button>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=pmpradodevera@gmail.com&su=Inquiry%20via%20Portfolio" target="_blank" rel="noopener" class="btn secondary btn-sm" title="Open Gmail composer directly in web browser">
+            Gmail (Web)
+          </a>
           <button class="copy" id="copy" type="button" aria-label="Copy email address to clipboard">Copy</button>
         </div>
       </div>
@@ -1007,6 +1140,54 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
 <dialog class="lightbox" id="lightbox">
   <img id="lbimg" alt="Enlarged preview">
   <button type="button" id="lbclose" aria-label="Close dialog">Close &times;</button>
+</dialog>
+
+<!-- Email Launcher Modal -->
+<dialog class="email-modal" id="email-modal">
+  <div class="modal-box">
+    <div class="modal-top">
+      <h3>Send Email to Philip</h3>
+      <button type="button" class="modal-close" id="email-modal-close" aria-label="Close dialog">&times;</button>
+    </div>
+    <p class="modal-sub">Choose your preferred email client or platform:</p>
+    <div class="email-options">
+      <!-- Option 1: Gmail Web -->
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=pmpradodevera@gmail.com&su=Inquiry%20via%20Portfolio" target="_blank" rel="noopener" class="email-opt primary-opt">
+        <div class="opt-ico" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <div class="opt-text">
+          <b>Gmail (Web Browser)</b>
+          <span>Opens Gmail compose in a new tab with recipient pre-filled</span>
+        </div>
+        <span class="opt-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <!-- Option 2: Default System Mail App -->
+      <a href="mailto:pmpradodevera@gmail.com?subject=Inquiry%20via%20Portfolio" class="email-opt">
+        <div class="opt-ico" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="opt-text">
+          <b>Default Mail App</b>
+          <span>Opens Outlook, Apple Mail, or your device's default mail application</span>
+        </div>
+        <span class="opt-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <!-- Option 3: Copy Email -->
+      <button type="button" class="email-opt" id="modal-copy-btn">
+        <div class="opt-ico" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        </div>
+        <div class="opt-text">
+          <b id="modal-copy-label">Copy Email Address</b>
+          <span>pmpradodevera@gmail.com</span>
+        </div>
+        <span class="opt-badge" id="modal-copy-badge">Copy</span>
+      </button>
+    </div>
+  </div>
 </dialog>
 
 <!-- ==========================================================================
@@ -1234,6 +1415,60 @@ dialog.lightbox button:hover { color: var(--accent); border-color: var(--accent)
     ta.select();
     try { document.execCommand('copy'); if (cb) cb(); } catch (err) {}
     document.body.removeChild(ta);
+  }
+
+  // 8. Email Launcher Modal & Copy Handling
+  var emailModal = document.getElementById('email-modal');
+  var sendEmailBtn = document.getElementById('btn-send-email');
+  var emailModalClose = document.getElementById('email-modal-close');
+  var modalCopyBtn = document.getElementById('modal-copy-btn');
+  var modalCopyLabel = document.getElementById('modal-copy-label');
+  var modalCopyBadge = document.getElementById('modal-copy-badge');
+
+  if (sendEmailBtn && emailModal) {
+    sendEmailBtn.addEventListener('click', function () {
+      if (typeof emailModal.showModal === 'function') {
+        emailModal.showModal();
+      } else {
+        window.open('https://mail.google.com/mail/?view=cm&fs=1&to=pmpradodevera@gmail.com&su=Inquiry%20via%20Portfolio', '_blank');
+      }
+    });
+  }
+
+  if (emailModalClose && emailModal) {
+    emailModalClose.addEventListener('click', function () { emailModal.close(); });
+    emailModal.addEventListener('click', function (e) {
+      if (e.target === emailModal) emailModal.close();
+    });
+  }
+
+  if (modalCopyBtn) {
+    modalCopyBtn.addEventListener('click', function () {
+      var emailText = 'pmpradodevera@gmail.com';
+      function onModalCopied() {
+        if (modalCopyLabel) modalCopyLabel.textContent = 'Copied to Clipboard!';
+        if (modalCopyBadge) {
+          modalCopyBadge.textContent = 'Copied!';
+          modalCopyBadge.style.color = 'var(--good)';
+          modalCopyBadge.style.borderColor = 'var(--good)';
+        }
+        setTimeout(function () {
+          if (modalCopyLabel) modalCopyLabel.textContent = 'Copy Email Address';
+          if (modalCopyBadge) {
+            modalCopyBadge.textContent = 'Copy';
+            modalCopyBadge.style.color = '';
+            modalCopyBadge.style.borderColor = '';
+          }
+        }, 2000);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(emailText).then(onModalCopied, function () {
+          fallbackCopy(emailText, onModalCopied);
+        });
+      } else {
+        fallbackCopy(emailText, onModalCopied);
+      }
+    });
   }
 })();
 </script>
